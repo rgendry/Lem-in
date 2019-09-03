@@ -6,7 +6,7 @@
 #    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/30 16:16:19 by rgendry           #+#    #+#              #
-#    Updated: 2019/08/30 19:27:24 by rgendry          ###   ########.fr        #
+#    Updated: 2019/09/03 15:30:29 by rgendry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ HEADERS = -I include -I libft
 
 LIBFLAGS = -L libft -lft
 
-IMFLAGS = -Wall -Wextra -Werror
+IMFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

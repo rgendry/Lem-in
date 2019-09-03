@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.h                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgendry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 16:17:06 by rgendry           #+#    #+#             */
-/*   Updated: 2019/08/30 16:17:09 by rgendry          ###   ########.fr       */
+/*   Created: 2019/09/02 15:15:09 by rgendry           #+#    #+#             */
+/*   Updated: 2019/09/02 15:29:16 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_H
-# define LEMIN_H
-# include "libft.h"
+#include "libft.h"
+#include <stdlib.h>
 
-typedef struct	s_lem
+char	*ft_strndup(const char *s1, char c)
 {
-	int			ants;
-	int			nodesize;
-	int			linksize;
-	char		*start;
-	char		*end;
-	char		**nodes;
-	char		**links;
-}				t_lem;
+	int		i;
+	char	*s2;
 
-int				validation(char *file, t_lem *p);
-int				printerr();
-
-#endif
+	i = 0;
+	while (s1[i] != c)
+		i++;
+	s2 = (char *)malloc(sizeof(char) * (i + 1));
+	if (s2 == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i] != c)
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return (s2);
+}

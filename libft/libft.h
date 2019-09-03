@@ -30,6 +30,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strdup(const char *s1);
+char                *ft_strndup(const char *s1, char c);
 char				*ft_strcat(char *s1, const char *s2);
 int					ft_isdigit(int c);
 int					ft_isascii(int c);
