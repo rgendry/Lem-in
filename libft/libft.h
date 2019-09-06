@@ -6,17 +6,23 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 17:42:33 by rgendry           #+#    #+#             */
-/*   Updated: 2019/06/26 13:40:12 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/06 14:59:35 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 100
+# define BUFF_SIZE 1000000
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+
+typedef struct		s_lst
+{
+	char			*content;
+	struct s_lst	*next;
+}					t_lst;
 
 typedef struct		s_list
 {
@@ -25,12 +31,13 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+t_lst				*ft_listnew(char *content);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strdup(const char *s1);
-char                *ft_strndup(const char *s1, char c);
+char				*ft_strndup(const char *s1, char c);
 char				*ft_strcat(char *s1, const char *s2);
 int					ft_isdigit(int c);
 int					ft_isascii(int c);

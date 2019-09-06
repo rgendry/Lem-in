@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_listnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 16:17:58 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/06 15:51:26 by rgendry          ###   ########.fr       */
+/*   Created: 2019/09/05 20:07:24 by rgendry           #+#    #+#             */
+/*   Updated: 2019/09/05 20:25:21 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
-#include <stdio.h>
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(void)
+t_lst	*ft_listnew(char *content)
 {
-	t_lem	p;
+	t_lst *list;
 
-	p.nodesize = 0;
-	p.linksize = 0;
-	p.ants = 0;
-	p.start = NULL;
-	p.end = NULL;
-	if (!validation(&p))
-		return (printerr(0));
-	return (1);
+	if (!(list = (t_lst *)malloc(sizeof(t_lst))))
+		return (NULL);
+	if (content == NULL)
+		list->content = NULL;
+	else
+		list->content = ft_strdup(content);
+	list->next = NULL;
+	return (list);
 }

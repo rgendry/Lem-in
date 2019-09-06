@@ -14,6 +14,15 @@
 # define LEMIN_H
 # include "libft.h"
 
+typedef struct	s_info
+{
+	int			size;
+	int			start;
+	int			end;
+	t_lst		*head;
+	t_lst		*lst;
+}				t_info;
+
 typedef struct	s_lem
 {
 	int			ants;
@@ -25,7 +34,7 @@ typedef struct	s_lem
 	char		**links;
 }				t_lem;
 
-int				validation(char *file, t_lem *p);
+int				validation(t_lem *p);
 int				printerr();
 
 #endif
