@@ -6,45 +6,69 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 13:54:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/11 18:41:31 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:07:18 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-t_allway    *sort_list(t_allway *map)
-{
-    t_way       *temp;
-    t_allway    *head;
+// t_allway    *sort_list(t_allway *map)
+// {
+//     t_way       *temp;
+//     t_allway    *head;
 
-    head = map;
-    while (map->next)
-    {
-        if (map->size > map->next->size)
-        {
-            temp = map->go;
-            map->go = map->next->go;
-            map->next->go = temp;
-            map = head;
-        }
-        else
-            map = map->next;
-    }
-    map = head;
-    return (map);
-}
+//     head = map;
+//     while (map && map->next)
+//     {
+//         if (map->size > map->next->size)
+//         {
+//             temp = map->go;
+//             map->go = map->next->go;
+//             map->next->go = temp;
+//             map = head;
+//         }
+//         else
+//             map = map->next;
+//     }
+//     map = head;
+//     return (map);
+// }
+
+// void    print_paths(t_allway *map, int ants, int paths)
+// {
+//     int i;
+//     int j;
+
+//     i = 1;
+//     j = 0;
+//     while (ants > 0)
+//     {
+//         while (j < paths && ants > 0)
+//         {
+//             printf("L%d-", i);
+//             printf("%s ", map->go->sosed->key);
+//             map->next;
+//             j++;
+//             ants--;
+//         }
+//         j = 0;
+//         printf("\n");
+//     }
+// }
 
 void    calc_path(t_allway *map, int ants)
 {
     int index;
     int i;
-    int j;
+    int paths;
 
     i = 0;
-    j = 1;
+    paths = 0;
     index = 1;
     while (map && ants > 0)
     {
+        if (map->next && map->next->size > ants)
+            break ;
         if (map->gap == 0 && i == 0)
             i = 1;
         else if (map->gap == 0 && i == 1)
@@ -52,11 +76,11 @@ void    calc_path(t_allway *map, int ants)
         else if (map->gap != 0 && i == 1)
             i = 0;
         printf("%d   ", ants);
-        ants = ants - (map->gap * index) + j;
-        j++;
-        //printf("%d   ", ants);
+        ants = ants - (map->gap * index) - paths;
         map = map->prev;
+        paths++;
     }
+    printf("\n%d   ", paths);
 }
 
 void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
@@ -74,9 +98,7 @@ void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
         map_oneway->size++;
         temp = temp->next;
     }
-    //printf("size small way =  %d\n", map_oneway->size);
     temp1 = map;
-    sort_list(temp1);
     while (temp1)
     {
         temp1->size = 0;
@@ -86,6 +108,15 @@ void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
             temp = temp->next;
             temp1->size++;
         }
+        printf(" razmer %d\n",temp1->size);
+        if (temp1->next == NULL)
+            temp2 = temp1;
+        temp1 = temp1->next;
+    }
+    temp1 = map;
+    //sort_list(temp1);
+    while (temp1)
+    {
         temp1->gap = last_size - temp1->size;
         last_size = temp1->size;
         printf("size way =   %d\n", temp1->size);
@@ -95,7 +126,6 @@ void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
         temp1 = temp1->next;
     }
     temp1 = map;
-    sort_list(temp1);
     while (temp1->next)
         temp1 = temp1->next;
     calc_path(temp1, fl->ants);

@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 12:46:35 by blomo             #+#    #+#             */
-/*   Updated: 2019/09/11 18:41:33 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/11 18:50:56 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void more_of_map(t_allway **map, t_way *temp1)
     *map = map1;
 }
 
-t_allway *create_map(t_v **hashtab, char *start, char *end,t_flag *fl)
+t_allway *create_map(t_v **hashtab, char *start, char *end, t_flag *fl)
 {
     t_allway  *map;
     t_way *temp;
@@ -39,19 +39,18 @@ t_allway *create_map(t_v **hashtab, char *start, char *end,t_flag *fl)
     t_way *temp2;
     map = NULL;
     fl->k = 1;
-    while(fl->c)
+    while (fl->c)
     {
         temp  = ft_way(hashtab,start, end, fl);
-
-        if(fl->c)
+        if (fl->c)
         {
             temp1 = create_smallway(temp,end);
-            temp2= temp1;
-            while(temp2)
+            temp2 = temp1;
+            while (temp2)
                 temp2 = temp2->next;
             close_way(temp1);
         }
-        if(map == NULL)
+        if (map == NULL)
         {
             if (fl->c)
                 one_of_map(&map ,temp1);
@@ -62,7 +61,7 @@ t_allway *create_map(t_v **hashtab, char *start, char *end,t_flag *fl)
                 more_of_map(&map, temp1);
         }
     }
-    return(map);
+    return (map);
 }
 
 void  ft_multyway(t_v **hashtab, char *start, char *end, t_flag *fl)
