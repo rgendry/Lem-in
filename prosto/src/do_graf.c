@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   do_graf.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: blomo <blomo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 16:32:29 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/11 13:10:19 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/11 12:46:44 by blomo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void    dograf(t_lem *p) // принимаем массив комнат и их количество
+void    dograf(t_lem *p)//char **str, int n, char **str1, int n1) // принимаем массив комнат и их количество
 {
     t_flag  *fl;
     t_v     *hashtab[p->nodesize];
+    // t_v     *node;
 
     fl = (t_flag*)malloc(sizeof(t_flag));
     fl->hash_nbr = p->nodesize;
@@ -90,7 +91,7 @@ void    list_with_connect(t_v *node,  t_v *node1)
     }
 }
 
-void   doconnect(t_v **hashtab, t_flag *fl, t_lem *p)
+void   doconnect(t_v **hashtab, t_flag *fl, t_lem *p)//char  **str1, int n1)
 {
     t_v *node;
     t_v *node1;
@@ -114,6 +115,6 @@ void   doconnect(t_v **hashtab, t_flag *fl, t_lem *p)
         list_with_connect(node1,node);
         fl->k = 0;
     }
-    node = hashtab_lookup(hashtab, "4", fl->hash_nbr);
+    fl->ants = p->ants;
     ft_multyway(hashtab,p->start, p->end, fl);
 }
