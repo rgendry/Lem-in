@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 16:32:29 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/11 13:10:19 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:07:00 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void    dograf(t_lem *p) // принимаем массив комнат и их количество
+void    dograf(t_lem *p)// принимаем массив комнат и их количество
 {
     t_flag  *fl;
     t_v     *hashtab[p->nodesize];
@@ -26,14 +26,7 @@ void    dograf(t_lem *p) // принимаем массив комнат и их
         hashtab_add(hashtab, p->nodes[fl->i], fl->i, fl->hash_nbr);
         fl->i++;
     }
-    // i = 0;
-    // while(i < n)
-    // {
-    //     node = hashtab_lookup(hashtab, str[i], fl->hash_nbr);
-    //     printf("Node: %s, %d\n", node->key, node->value);  //печать списка смежности
-    //     i++;
-    // }
-    doconnect(hashtab, fl, p);//p->links, p->linksize);
+    doconnect(hashtab, fl, p);
 }
 
 void   copydominus(t_flag *fl, char *str)
@@ -114,6 +107,6 @@ void   doconnect(t_v **hashtab, t_flag *fl, t_lem *p)
         list_with_connect(node1,node);
         fl->k = 0;
     }
-    node = hashtab_lookup(hashtab, "4", fl->hash_nbr);
+    fl->ants = p->ants;
     ft_multyway(hashtab,p->start, p->end, fl);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
+#    By: blomo <blomo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/30 16:16:19 by rgendry           #+#    #+#              #
-#    Updated: 2019/09/03 15:30:29 by rgendry          ###   ########.fr        #
+#    Updated: 2019/09/09 23:43:04 by blomo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ HEADERS = -I include -I libft
 
 LIBFLAGS = -L libft -lft
 
-IMFLAGS = -Wall -Wextra -Werror -g
+IMFLAGS = -g
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:17:58 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/06 16:49:14 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:06:59 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	main(void)
 	p.end = NULL;
 	if (!validation(&p))
 		return (0);
-	dograf(&p);//array, i, array1, j);
+	dograf(&p);
 	return (1);
 }

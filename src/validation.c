@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:29:43 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/06 15:52:58 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:06:57 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,6 @@ int		makemaps(t_info *h, t_lem *p)
 	printarr(p);
 	return (1);
 }
-
-// void	printlist(t_lst *head)
-// {
-// 	while (head)
-// 	{
-// 		printf("%s\n", head->content);
-// 		head = head->next;
-// 	}
-// }
 
 int		validation(t_lem *p)
 {

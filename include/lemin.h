@@ -15,8 +15,9 @@
 # include "libft.h"
 # include <string.h>
 # define BUF_MAX 10260
-#define HASHTAB_MUL 31
+# define HASHTAB_MUL 31
 # include <fcntl.h>
+# include <stdio.h>
 # include <sys/types.h>
 
 typedef struct	s_info
@@ -46,6 +47,7 @@ typedef struct	s_flag
 	int			k;
 	int			i;
 	int			j;
+	int 		ants;
 	int			line;
 	int			status;
 	int			hash_nbr;
@@ -55,23 +57,25 @@ typedef struct	s_flag
 	char		*ptr1;
 }				t_flag;
 
-typedef struct	s_connection
+typedef struct		s_connection
 {
-	struct s_v	*bonds; // нода с которой связь
+	struct s_v		*bonds; // нода с которой связь
 	struct s_connection	*next;
-	int			vizit;
-}				t_connection;
+	int				vizit;
+}					t_connection;
 
-typedef struct	s_v
+typedef struct		s_v
 {
-	char		*key;
-	int			value;
-	int			vizit;
+	char			*key;
+	int				value;
+	int				vizit;
+	int				smezh_rebro;
 	struct s_connection	*knot; // указатель на ноду с которой связь
-	struct s_v	*next;
-}				t_v;
+	struct s_v		*next;
+	int				is_node_one;
+}					t_v;
 
-typedef struct	s_way
+typedef struct		s_way
 {
 	struct s_v		*sosed;
 	struct s_way	*next;
@@ -80,7 +84,17 @@ typedef struct	s_way
 	int				poryadok;
 	int				status;
 	int				number;
+	int				size;
 }					t_way;
+
+typedef struct		s_allway
+{
+    struct s_way    *go;
+    struct s_allway *next;
+	struct s_allway *prev;
+	int				size;
+	int				gap;
+}					t_allway;
 
 int				validation(t_lem *p);
 int				hashtab_hash(char *key, int n);
@@ -91,8 +105,12 @@ void			doconnect(t_v **hashtab, t_flag *fl, t_lem *p);
 t_way			*ft_way(t_v **hashtab, char *start, char *end, t_flag *fl);
 void			ft_bzero(void *str, size_t len);
 void			dograf(t_lem *p);
-t_way			*create_smallway(t_way *ochered);
+t_way  			*create_smallway(t_way *ochered, char *str);
 void			close_way(t_way *way);
 void			ft_multyway(t_v **hashtab, char *start, char *end, t_flag *fl);
+t_way			*poisk_vershin_s_indeksom_2(t_v **hashtab,t_flag *fl);
+void			open_way(t_allway *map);
+void			close_rebra(t_way *rebra);
+void 			go_ants(t_allway  *map_oneway, t_allway  *map , t_flag *fl);
 
 #endif
