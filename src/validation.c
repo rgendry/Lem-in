@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:29:43 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/19 19:06:57 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/24 18:55:30 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ void	printarr(t_lem *p)
 	int i;
 
 	i = 0;
-	printf("%s\n", "LINKS");
+	// printf("%s\n", "LINKS");
 	while (i < p->linksize)
 	{
-		printf("%s\n", p->links[i]);
+		// printf("%s\n", p->links[i]);
 		i++;
 	}
 	i = 0;
-	printf("%s\n", "NODES");
+	// printf("%s\n", "NODES");
 	while (i < p->nodesize)
 	{
-		printf("%s\n", p->nodes[i]);
+		// printf("%s\n", p->nodes[i]);
 		i++;
 	}
-	printf("ANTS: %d\n", p->ants);
-	printf("START: %s\n", p->start);
-	printf("END: %s\n", p->end);
+	// printf("ANTS: %d\n", p->ants);
+	// printf("START: %s\n", p->start);
+	// printf("END: %s\n", p->end);
 }
 
 int		makemaps(t_info *h, t_lem *p)
@@ -131,8 +131,8 @@ int		validation(t_lem *p)
 	h.size = 0;
 	while (get_next_line(0, &line))
 	{
-		ft_putstr(line);
-		ft_putchar('\n');
+		// ft_putstr(line);
+		// ft_putchar('\n');
 		if (!h.size && line[0] != '#')
 		{
 			h.lst = ft_listnew(line);
