@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:17:58 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/19 19:06:59 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/26 23:09:35 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	main(void)
 	p.end = NULL;
 	if (!validation(&p))
 		return (0);
-	dograf(&p);
+	dogrf(&p);
 	return (1);
 }
