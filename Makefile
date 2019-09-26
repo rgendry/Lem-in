@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blomo <blomo@student.42.fr>                +#+  +:+       +#+         #
+#    By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/30 16:16:19 by rgendry           #+#    #+#              #
-#    Updated: 2019/09/09 23:43:04 by blomo            ###   ########.fr        #
+#    Updated: 2019/09/26 22:04:26 by idunaver         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ OBJ = $(SRC:.c=.o)
 
 HEADERS = -I include -I libft
 
-LIBFLAGS = -L libft -lft
+LIBFLAGS = -L libft -lft -g
 
-IMFLAGS = -g
+IMFLAGS = -g -O0
 
 all: $(NAME)
 

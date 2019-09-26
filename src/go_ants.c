@@ -6,7 +6,7 @@
 /*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 13:54:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/24 20:09:47 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/09/26 23:08:33 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,66 @@ size_t  len_list_map(t_allway *map)
 	return (len);
 }
 
-// void    sort_list(t_allway *map)
-// {
-// 	size_t  	len_list;
-// 	t_allway	*head;
-// 	t_allway	*curr;
-// 	t_allway	*prev;
+void	print_list(t_allway *list)
+{
+	t_allway *tmp;
 
-// 	len_list = len_list_map(map);
-// 	head = map;
-// 	while (map)
-// 	{
-// 		if (head == map)
-// 		{
-// 			if (map->next && map->next->next && map->size < map->next->size)
-// 			{
-// 				second = map->next;
-// 				third = map->next->next;
-// 				map->next = second->next;
-// 				third->prev = map;
-// 				second->next = map;
-// 				map->prev = second;
-// 				head = map;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			if (map->next && map->next->next && map->size < ma)
-// 		}
-// 		map = map->next;
-// 	}
-// }
+	tmp = list;
+	while (tmp)
+	{
+		printf("list->size: %d\n", tmp->size);
+		tmp = tmp->next;
+	}
+}
+
+int		check_head(t_allway *a)
+{
+	if (!a->prev)
+		return (1);
+	return (0);
+}
+
+t_allway	*swap_elems(t_allway *a, t_allway *b, t_allway **map)
+{
+	t_allway *a_prev;
+	t_allway *b_next;
+
+	if (check_head(a))
+		*map = b;
+	a_prev = a->prev;
+	b_next = b->next;
+	if (a_prev)
+		a_prev->next = b;
+	b->prev = a_prev;
+	b->next = a;
+	a->prev = b;
+	a->next = b_next;
+	if (b_next)
+		b_next->prev = a;
+	return b;
+}
+
+void    sort_list(t_allway **map)
+{
+	t_allway	*tmp;
+
+	if (!map || !*map)
+		return ;
+	tmp = *map;
+	while (tmp && tmp->next)
+	{
+		if (tmp->size > tmp->next->size)
+		{
+			tmp = swap_elems(tmp, tmp->next, map);
+			if (tmp->prev)
+				tmp = tmp->prev;
+			continue ;
+		}
+		tmp = tmp->next;
+	}
+	printf("\n");
+	print_list(*map);
+}
 
 void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
 {
@@ -114,7 +143,9 @@ void    go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
 			break ;
 	}
 	temp1 = map;
-	// sort_list(temp1);
+	// print_list(temp1);
+	// printf("\n");
+	sort_list(&temp1);
 	while (temp1)
 	{
 		temp1->gap = last_size - temp1->size;
