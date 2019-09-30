@@ -1,116 +1,123 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.h                                           :+:      :+:    :+:   */
+/*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 16:17:06 by rgendry           #+#    #+#             */
-/*   Updated: 2019/08/30 16:17:09 by rgendry          ###   ########.fr       */
+/*   Created: 2019/09/30 17:29:25 by idunaver          #+#    #+#             */
+/*   Updated: 2019/09/30 17:58:18 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
+
 # include "libft.h"
 # include <string.h>
-# define BUF_MAX 10260
-# define HASHTAB_MUL 31
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/types.h>
 
-typedef struct	s_info
-{
-	int			size;
-	int			start;
-	int			end;
-	t_lst		*head;
-	t_lst		*lst;
-}				t_info;
+# define BUF_MAX 10260
+# define HASHTAB_MUL 31
 
-typedef struct	s_lem
+typedef struct			s_info
 {
-	int			ants;
-	int			nodesize;
-	int			linksize;
-	char		*start;
-	char		*end;
-	char		**nodes;
-	char		**links;
-}				t_lem;
+	int					size;
+	int					start;
+	int					end;
+	t_lst				*head;
+	t_lst				*lst;
+}						t_info;
 
-typedef struct	s_flag
+typedef struct			s_lem
 {
-	int			p;
-	int			c;
-	int			k;
-	int			i;
-	int			j;
-	int 		ants;
-	int			line;
-	int			status;
-	int			hash_nbr;
-	char		temp[10];
-	char		temp1[10];
-	char		*ptr;
-	char		*ptr1;
-}				t_flag;
+	int					ants;
+	int					nodesize;
+	int					linksize;
+	char				*start;
+	char				*end;
+	char				**nodes;
+	char				**links;
+}						t_lem;
 
-typedef struct		s_connection
+typedef struct			s_flag
 {
-	struct s_v		*bonds; // нода с которой связь
+	int					p;
+	int					c;
+	int					k;
+	int					i;
+	int					j;
+	int					ants;
+	int					line;
+	int					status;
+	int					hash_nbr;
+	char				temp[10];
+	char				temp1[10];
+	char				*ptr;
+	char				*ptr1;
+}						t_flag;
+
+typedef struct			s_connection
+{
+	struct s_v			*bonds; // нода с которой связь
 	struct s_connection	*next;
-	int				vizit;
-}					t_connection;
+	int					vizit;
+}						t_connection;
 
-typedef struct		s_v
+typedef struct			s_v
 {
-	char			*key;
-	int				value;
-	int				vizit;
-	int				smezh_rebro;
+	char				*key;
+	int					value;
+	int					vizit;
+	int					smezh_rebro;
 	struct s_connection	*knot; // указатель на ноду с которой связь
-	struct s_v		*next;
-	int				is_node_one;
-}					t_v;
+	struct s_v			*next;
+	int					is_node_one;
+}						t_v;
 
-typedef struct		s_way
+typedef struct			s_way
 {
-	struct s_v		*sosed;
-	struct s_way	*next;
-	struct s_way	*revnext;
-	struct s_v		*prev;
-	int				poryadok;
-	int				status;
-	int				number;
-	int				size;
-}					t_way;
+	struct s_v			*sosed;
+	struct s_way		*next;
+	struct s_way		*revnext;
+	struct s_v			*prev;
+	int					poryadok;
+	int					status;
+	int					number;
+	int					size;
+}						t_way;
 
-typedef struct		s_allway
+typedef struct			s_allway
 {
-    struct s_way    *go;
-    struct s_allway *next;
-	struct s_allway *prev;
-	int				size;
-	int				gap;
-}					t_allway;
+	struct s_way		*go;
+	struct s_allway		*next;
+	struct s_allway		*prev;
+	int					size;
+	int					gap;
+}						t_allway;
 
-int				validation(t_lem *p);
-int				hashtab_hash(char *key, int n);
-void			hashtab_init(t_v **hashtab, int n);
-void			hashtab_add(t_v **hashtab, char *key, int value, int n);
-t_v				*hashtab_lookup(t_v **hashtab, char *key, int n);
-void			doconnect(t_v **hashtab, t_flag *fl, t_lem *p);
-t_way			*ft_way(t_v **hashtab, char *start, char *end, t_flag *fl);
-void			ft_bzero(void *str, size_t len);
-void			dograf(t_lem *p);
-t_way  			*create_smallway(t_way *ochered, char *str);
-void			close_way(t_way *way);
-void			ft_multyway(t_v **hashtab, char *start, char *end, t_flag *fl);
-t_way			*poisk_vershin_s_indeksom_2(t_v **hashtab,t_flag *fl);
-void			open_way(t_allway *map);
-void			close_rebra(t_way *rebra);
-void 			go_ants(t_allway  *map_oneway, t_allway  *map , t_flag *fl);
+int						validation(t_lem *p);
+int						hashtab_hash(char *key, int n);
+void					hashtab_init(t_v **hashtab, int n);
+void					hashtab_add(t_v **hashtab, char *key, int value, int n);
+t_v						*hashtab_lookup(t_v **hashtab, char *key, int n);
+void					doconnect(t_v **hashtab, t_flag *fl, t_lem *p);
+t_way					*ft_way(t_v **hashtab, char *start,
+char *end, t_flag *fl);
+void					ft_bzero(void *str, size_t len);
+void					dograf(t_lem *p);
+t_way					*create_smallway(t_way *ochered, char *str);
+void					close_way(t_way *way);
+void					ft_multyway(t_v **hashtab, char *start,
+char *end, t_flag *fl);
+t_way					*poisk_vershin_s_indeksom_2(t_v **hashtab, t_flag *fl);
+void					open_way(t_allway *map);
+void					close_rebra(t_way *rebra);
+void					go_ants(t_allway *map_oneway,
+t_allway *map, t_flag *fl);
+void					sort_list(t_allway **map);
+size_t					len_list_map(t_allway *map);
 
 #endif

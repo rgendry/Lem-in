@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:17:58 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/19 19:06:59 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/30 17:33:58 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-#include <stdio.h>
 
 int	main(void)
 {

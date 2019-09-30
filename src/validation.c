@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:29:43 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/19 19:06:57 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/09/30 18:13:41 by idunaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ int		validation(t_lem *p)
 			h.head = h.lst;
 			h.size++;
 		}
-		else if (line[0] != '#' || !ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
+		else if (line[0] != '#' ||
+		!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
 		{
 			if (ft_strchr(line, ' '))
 				p->nodesize++;
