@@ -3,83 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   go_ants.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/11 13:54:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/09/30 18:10:32 by idunaver         ###   ########.fr       */
+/*   Created: 2019/10/13 17:10:52 by rgendry           #+#    #+#             */
+/*   Updated: 2019/10/21 20:41:54 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "lem_in.h"
 
-int		calc_path(t_allway *map, int ants)
+t_path	*find_min_path(t_path *paths)
 {
-	int	paths;
-	int	i;
-	int	j;
-	int	t;
+	t_path	*result;
+	t_path	*path;
+	int		size;
 
-	while (map->next)
-		map = map->next;
-	paths = 1;
-	i = map->size + ants;
-	j = 0;
-	if (ants < map->gap)
-		return (paths);
-	while (map && map->prev)
+	result = paths;
+	size = result->size;
+	path = paths;
+	while (path)
 	{
-		t = (ants - map->gap) / paths;
-		map = map->prev;
-		j = map->size + t;
-		if (j > i)
-			return (paths--);
-		i = j;
-		paths++;
+		if (size > path->size)
+		{
+			result = path;
+			size = result->size;
+		}
+		path = path->next;
 	}
-	return (paths--);
+	return (result);
 }
 
-void	go_ants(t_allway *map_oneway, t_allway *map, t_flag *fl)
+void	split_ants(t_lem *lem, t_path *paths, t_group **group)
 {
-	int			last_size;
-	t_way		*temp;
-	t_allway	*temp1;
-	t_allway	*temp2;
+	t_path	*min_way;
 
-	last_size = 2147483647;
-	temp = map_oneway->go;
-	map_oneway->size = 0;
-	while (temp->next)
+	while (lem->ants)
 	{
-		map_oneway->size++;
-		temp = temp->next;
+		min_way = find_min_path(paths);
+		if (!check_groups(*group, min_way))
+			add_group(group, create_group(min_way));
+		min_way->size++;
+		lem->ants--;
 	}
-	temp1 = map;
-	while (temp1)
+}
+
+int		print_line(t_lem *lem, t_ant *ants)
+{
+	int	end;
+	int	count;
+
+	end = lem->size - 1;
+	count = 0;
+	while (ants)
 	{
-		temp1->size = 0;
-		temp = temp1->go;
-		while (temp->next)
+		if (ants->node != end)
 		{
-			temp = temp->next;
-			temp1->size++;
+			ants->node = ants->way->used[ants->node];
+			ft_printf("L%d-%s", ants->name, lem->map[ants->node].name);
+			if (ants->next && ants->way->used[ants->next->node] != end)
+				ft_printf(" ");
+			count = 1;
 		}
-		temp1 = temp1->next;
-		if (!temp1)
-			break ;
+		ants = ants->next;
 	}
-	temp1 = map;
-	sort_list(temp1);
-	while (temp1)
+	if (count)
+		ft_printf("\n");
+	return (count);
+}
+
+void	set_ants(t_lem *lem, t_group *group, t_ant **ants)
+{
+	int		ant;
+	int		count;
+	t_group	*curr;
+
+	ant = 1;
+	count = 1;
+	while (count)
 	{
-		temp1->gap = last_size - temp1->size;
-		last_size = temp1->size;
-		printf("size way =   %d\n", temp1->size);
-		printf("gap size =   %d\n", temp1->gap);
-		temp1 = temp1->next;
-		if (!temp1)
-			break ;
+		count = 0;
+		curr = group;
+		while (curr)
+		{
+			if (curr->ants)
+			{
+				add_ant(ants, create_ant(ant, curr->path));
+				ant++;
+				curr->ants--;
+				count = 1;
+			}
+			curr = curr->next;
+		}
+		print_line(lem, *ants);
 	}
-	temp1 = map;
-	printf("%d\n", calc_path(temp1, fl->ants));
+}
+
+void	go_ants(t_lem *lem, t_path *paths)
+{
+	int		count;
+	t_ant	*ants;
+	t_group	*group;
+
+	group = NULL;
+	ants = NULL;
+	split_ants(lem, paths, &group);
+	set_ants(lem, group, &ants);
+	count = 1;
+	while (count)
+		count = print_line(lem, ants);
+	free_groups(&group);
+	free_ants(&ants);
 }

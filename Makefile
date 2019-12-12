@@ -3,49 +3,67 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blomo <blomo@student.42.fr>                +#+  +:+       +#+         #
+#    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/30 16:16:19 by rgendry           #+#    #+#              #
-#    Updated: 2019/09/09 23:43:04 by blomo            ###   ########.fr        #
+#    Created: 2019/07/08 14:50:16 by rgendry           #+#    #+#              #
+#    Updated: 2019/10/19 19:42:32 by rgendry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem-in
+.PHONY: all libft clean fclean re
 
-SRC_SEARCH = src/*.c
+OBJDIR = obj
+SRCDIR = src
+LIBDIR = libft
+HEADER = -I ./include
+HEADER_LIBFT = -I ./libft/include -I ./libft/src/ft_printf/include
+FLAGS = -Wall -Wextra -Werror -g3 -g -O0
 
-SRC = $(wildcard $(SRC_SEARCH))
+LEM-IN = lem-in
+SRC_LEM-IN_NAME = main.c \
+				  error.c \
+				  secondary.c \
+				  validation.c \
+				  get_data.c \
+				  create_link.c \
+				  get_node.c \
+				  create_int.c \
+				  index_map.c \
+				  algorythm.c \
+				  status.c \
+				  find_path.c \
+				  go_ants.c \
+				  create_group.c \
+				  create_path.c \
+				  create_ant.c \
+				  lmn_free.c \
 
-OBJ = $(SRC:.c=.o)
+OBJ_LEM-IN_NAME = $(SRC_LEM-IN_NAME:.c=.o);
+SRC_LEM-IN = $(addprefix $(OBJDIR)/, $(SRC_LEM-IN_NAME))
+OBJ_LEM-IN = $(addprefix $(OBJDIR)/, $(OBJ_LEM-IN_NAME))
 
-HEADERS = -I include -I libft
+all: libft $(LEM-IN)
 
-LIBFLAGS = -L libft -lft
+$(LEM-IN): $(OBJ_LEM-IN)
+	@gcc $(FLAGS) $^ -o $@ $(HEADER_LIBFT) $(HEADER) -L libft -lft
 
-IMFLAGS = -g
+$(OBJDIR)/%.o: $(SRCDIR)/%.c include/lem_in.h
+	@mkdir -p $(OBJDIR)
+	@gcc $(FLAGS) $(HEADER_LIBFT) $(HEADER) -o $@ -c $<
 
-all: $(NAME)
-
-$(NAME): $(OBJ) libft
-	gcc $(OBJ) -o $@ $(LIBFLAGS)
-
-%.o: %.c
-	gcc -c $< -o $@ $(IMFLAGS) $(HEADERS) -g
-
-.PHONY: libft
 libft:
-	make -C libft
+	@make -C $(LIBDIR)
 
-.PHONY: clean
 clean:
-	make clean -C libft
-	rm -Rf $(OBJ)
+	@make clean -C $(LIBDIR)
+	@rm -Rf $(OBJDIR)
 
-.PHONY: fclean
 fclean: clean
-	make fclean -C libft
-	rm -Rf $(NAME)
+	@make fclean -C $(LIBDIR)
+	@rm -Rf $(LEM-IN)
 
-.PHONY: re
 re: fclean all
 
+norm:
+	norminette $(SRCDIR)
+	norminette ./include
